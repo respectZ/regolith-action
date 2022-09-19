@@ -8,6 +8,6 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'ghcr.io/bedrock-oss/regolith-action:latest'
+  image: 'docker://ghcr.io/bedrock-oss/regolith-action:latest'
   args:
     - ${{ inputs.profile }}
