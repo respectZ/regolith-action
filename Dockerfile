@@ -4,8 +4,7 @@ COPY entrypoint.sh /entrypoint.sh
 COPY prepareRegolith.sh /prepareRegolith.sh
 COPY version /version
 
-# for testing local build, uncomment following line
-# USER root
+USER root
 
 RUN apt update -y
 
