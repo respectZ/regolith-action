@@ -1,0 +1,13 @@
+name: "regolith"
+description: "Bedrock Addons compiler pipeline."
+inputs:
+  profile:
+    description: "profile to run"
+    default: "default"
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.profile }}
