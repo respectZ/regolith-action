@@ -7,7 +7,35 @@ inputs:
     required: false
 
 runs:
-  using: 'docker'
-  image: 'docker://ghcr.io/bedrock-oss/regolith-action:latest'
-  args:
-    - ${{ inputs.profile }}
+  using: 'composite'
+  steps:
+    - name: deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: vx.x.x
+    - name: nim
+      uses: iffy/install-nim@v4.2.0
+      with:
+        version: stable
+    - name: regolith
+      run: |
+        version=`cat /version`
+        wget https://github.com/Bedrock-OSS/regolith/releases/download/$(cat version)/regolith_$(cat version)_Linux_x86_64.tar.gz
+        tar -xzf regolith_$(cat version)_Linux_x86_64.tar.gz
+        mv regolith /usr/local/bin
+        rm regolith_$(cat version)_Linux_x86_64.tar.gz
+        chmod +x /usr/local/bin/regolith
+    - name: unlock
+      run: regolith unlock
+    - name: install
+      run: regolith install-all
+    - name: list versions
+      run: |
+        python --version
+        node -v
+        nim -v
+        java -version
+        deno --version
+        dotnet --list-sdks
+    - name: compile
+      run: regolith run ${{inputs.profile}}
