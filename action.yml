@@ -27,10 +27,13 @@ runs:
         rm regolith_$(cat version)_Linux_x86_64.tar.gz
         chmod +x /usr/local/bin/regolith
     - name: unlock
+      shell: bash
       run: regolith unlock
     - name: install
+      shell: bash
       run: regolith install-all
     - name: list versions
+      shell: bash
       run: |
         python --version
         node -v
@@ -39,4 +42,5 @@ runs:
         deno --version
         dotnet --list-sdks
     - name: compile
+      shell: bash
       run: regolith run ${{inputs.profile}}
