@@ -5,10 +5,19 @@ inputs:
     description: "profile to run"
     default: "default"
     required: false
+  github_token:
+    description: "GitHub Token for getting private filters"
+    default: ""
+    required: false
 
 runs:
   using: 'composite'
   steps:
+    - name: setup-git-credentials
+      uses: de-vri-es/setup-git-credentials@v2.0.8
+      if: ${{ inputs.github_token != '' }}
+      with:
+        credentials: ${{ inputs.github_token }}
     - name: deno
       uses: denoland/setup-deno@v1
       with:
