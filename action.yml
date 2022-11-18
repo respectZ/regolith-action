@@ -20,7 +20,6 @@ runs:
     - name: regolith
       shell: bash
       run: |
-        version=`cat /version`
         wget https://github.com/Bedrock-OSS/regolith/releases/download/$(cat version)/regolith_$(cat version)_Linux_x86_64.tar.gz
         tar -xzf regolith_$(cat version)_Linux_x86_64.tar.gz
         mv regolith /usr/local/bin
