@@ -26,6 +26,15 @@ runs:
       uses: iffy/install-nim@v4.2.0
       with:
         version: stable
+    - name: list versions
+      shell: bash
+      run: |
+        python --version
+        node -v
+        nim -v
+        java -version
+        deno --version
+        dotnet --list-sdks
     - name: regolith
       shell: bash
       run: |
@@ -36,19 +45,10 @@ runs:
         chmod +x /usr/local/bin/regolith
     - name: unlock
       shell: bash
-      run: regolith unlock
+      run: sudo regolith unlock
     - name: install
       shell: bash
-      run: regolith install-all
-    - name: list versions
-      shell: bash
-      run: |
-        python --version
-        node -v
-        nim -v
-        java -version
-        deno --version
-        dotnet --list-sdks
+      run: sudo regolith install-all
     - name: compile
       shell: bash
-      run: regolith run ${{inputs.profile}}
+      run: sudo regolith run ${{inputs.profile}}
