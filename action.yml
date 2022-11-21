@@ -9,6 +9,10 @@ inputs:
     description: "GitHub Token for getting private filters"
     default: ""
     required: false
+  github_username:
+    description: "GitHub username for getting private filters"
+    default: ""
+    required: false
 
 runs:
   using: 'composite'
@@ -17,7 +21,7 @@ runs:
       uses: de-vri-es/setup-git-credentials@v2.0.8
       if: ${{ inputs.github_token != '' }}
       with:
-        credentials: ${{ inputs.github_token }}
+        credentials: https://${{ inputs.github_username }}:${{ inputs.github_token }}@github.com
     - name: deno
       uses: denoland/setup-deno@v1
       with:
