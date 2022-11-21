@@ -47,12 +47,9 @@ runs:
         mv regolith /usr/local/bin
         rm regolith_$(cat ${{ github.action_path }}/version)_Linux_x86_64.tar.gz
         chmod +x /usr/local/bin/regolith
-    - name: unlock
-      shell: bash
-      run: sudo regolith unlock
     - name: install
       shell: bash
-      run: sudo regolith install-all
+      run: regolith install-all
     - name: compile
       shell: bash
-      run: sudo regolith run ${{inputs.profile}}
+      run: regolith run ${{inputs.profile}}
