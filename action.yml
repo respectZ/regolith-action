@@ -46,7 +46,7 @@ runs:
         wget -O regolith.tar.gz https://codeload.github.com/respectZ/regolith/tar.gz/refs/tags/$(cat ${{ github.action_path }}/version)
         tar -xzf regolith.tar.gz
         cd regolith-$(cat ${{ github.action_path }}/version)
-        ls
+        go work init .
         go build -o regolith
         mv regolith /usr/local/bin
         cd ..
