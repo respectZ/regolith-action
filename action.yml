@@ -43,13 +43,9 @@ runs:
     - name: regolith
       shell: bash
       run: |
-        wget -O regolith.tar.gz https://codeload.github.com/respectZ/regolith/tar.gz/refs/tags/$(cat ${{ github.action_path }}/version)
+        wget -O regolith.tar.gz https://github.com/respectZ/regolith/releases/download/$(cat ${{ github.action_path }}/version)/regolith.tar.gz
         tar -xzf regolith.tar.gz
-        cd regolith-$(cat ${{ github.action_path }}/version)
-        go work init .
-        go build -o regolith
         mv regolith /usr/local/bin
-        cd ..
         rm regolith.tar.gz
         chmod +x /usr/local/bin/regolith
     - name: install
